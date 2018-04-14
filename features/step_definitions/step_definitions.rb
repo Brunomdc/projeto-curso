@@ -14,8 +14,8 @@ Quando("sou direcionado para a {string}") do |page_Login|
  assert_selector(EL[page_Login])
 end
 
-Quando("preencho o {string} com {string}") do |field_Email, email|
-find(EL[field_Email]).set(email)
+Quando("preencho o {string} com {string}") do |field, value|
+find(EL[field]).set(EL[value])
 end
 
 Quando("seleciono o {string}") do |rb_No_Register|
@@ -29,18 +29,18 @@ end
 Dado("preenchi todos os campos da pagina da pagina de identificação") do
   find(EL["btn_Register"]).click
   assert_selector(EL["page_Login"])
-  find(EL["field_Email"]).set("bruno01@bruno.com")
+  find(EL["field_Email"]).set(EL["email_Valido"])
   find(EL["rb_No_Register"]).click
 end
 
-Quando("preencho o {string}") do |campos|
-find(EL[campos]).set()
-end
-
-Quando("seleciono o {string} com {string}") do |opcao, nome|
-find(EL[opcao]).click(nome)
+Quando("seleciono o {string} com {string}") do |field, value|
+find(EL[field]).select(value)
 end
 
 Quando("não seleciono o {string}") do |rb|
 find(EL[rb]).click
+end
+
+Entao("confirmo que sou um usario cadastrado {string}") do |logado|
+  assert_selector(EL[logado],wait: 15)
 end
